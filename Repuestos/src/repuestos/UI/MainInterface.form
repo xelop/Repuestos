@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="_lbl_MainTitle" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="_btn_AddClient" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="_btn_ModifyClient" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="_btn_AddPart" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="_btn_ErasePart" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="_btn_SuspendClient" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="_btn_ErasePart1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="189" pref="189" max="-2" attributes="0"/>
+                              <Component id="_btn_ErasePart2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="_btn_ListClients" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="_btn_ProviderParts" min="-2" max="-2" attributes="0"/>
+                          <Component id="_btn_ListParts" min="-2" max="-2" attributes="0"/>
+                          <Component id="_btn_ModifyPartPrice" min="-2" max="-2" attributes="0"/>
+                          <Component id="_btn_CreateOrder" min="-2" max="-2" attributes="0"/>
+                          <Component id="_btn_OrderItems" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="_lbl_MainTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="_btn_AddClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="_btn_AddPart" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="_btn_ModifyPartPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="_btn_ModifyClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="_btn_ErasePart" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="_btn_ListParts" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="_btn_ProviderParts" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="_btn_CreateOrder" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="_btn_OrderItems" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="_btn_SuspendClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="_btn_ErasePart1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="_btn_ListClients" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="_btn_ErasePart2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="_lbl_MainTitle">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Car Replacement Parts Shop"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_AddClient">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Client"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_AddClientMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ModifyClient">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modify Client"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ModifyClientMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_btn_ModifyClientActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ListClients">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="List Clients"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ListClientsMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_btn_ListClientsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_SuspendClient">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Suspend Clients"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_SuspendClientMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_AddPart">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Part"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_AddPartMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_btn_AddPartActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ErasePart">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Erase Part"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ErasePartMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ErasePart1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Associate Part/Provider"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ErasePart1MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ErasePart2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Associate Part/Cars"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ErasePart2MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ModifyPartPrice">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modify Part&apos;s Price"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ModifyPartPriceMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ListParts">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="List Parts Per Vehicule"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_btn_ListPartsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_ProviderParts">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Provider&apos;s Parts"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_ProviderPartsMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_CreateOrder">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Make Order"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="_btn_CreateOrderMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="_btn_OrderItems">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Order Items"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_btn_OrderItemsActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
