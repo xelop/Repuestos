@@ -434,4 +434,16 @@ public class DataBaseConnection {
     public void setErrorOcurred(boolean ErrorOcurred) {
         this.ErrorOcurred = ErrorOcurred;
     }
+    
+    public void insertFabricanteAutomovil(String pNombre){
+        try {
+            StoredProcCall= Connection.prepareCall("{call CreateFabricanteAutomovil(?)}");
+            StoredProcCall.setString(1, pNombre);
+            StoredProcCall.execute();
+        } 
+        catch (SQLException ex) {
+            System.out.println("Unknown error ocurred");
+            System.out.println(ex.getErrorCode()+ex.getMessage());
+        }
+    }
 }

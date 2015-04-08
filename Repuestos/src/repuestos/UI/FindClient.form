@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="_txt_Name" pref="106" max="32767" attributes="0"/>
+              <Component id="_txt_Name" pref="123" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="_btn_Find" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -51,7 +51,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name: "/>
+        <Property name="text" type="java.lang.String" value="Id: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="_txt_Name">

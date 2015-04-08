@@ -59,6 +59,11 @@ public class MainInterface extends javax.swing.JFrame {
                 _btn_AddClientMouseClicked(evt);
             }
         });
+        _btn_AddClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _btn_AddClientActionPerformed(evt);
+            }
+        });
 
         _btn_ModifyClient.setText("Modify Client");
         _btn_ModifyClient.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -324,6 +329,10 @@ public class MainInterface extends javax.swing.JFrame {
         new OrderItems(Control).setVisible(true);
         this.dispose();
     }//GEN-LAST:event__btn_OrderItemsActionPerformed
+
+    private void _btn_AddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__btn_AddClientActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__btn_AddClientActionPerformed
 
     /**
      * @param args the command line arguments

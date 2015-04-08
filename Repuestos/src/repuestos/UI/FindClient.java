@@ -41,7 +41,7 @@ public class FindClient extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Name: ");
+        jLabel1.setText("Id: ");
 
         _btn_Find.setText("Find");
         _btn_Find.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +58,7 @@ public class FindClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_txt_Name, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(_txt_Name, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(_btn_Find)
                 .addGap(23, 23, 23))
