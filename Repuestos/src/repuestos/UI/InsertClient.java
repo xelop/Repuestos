@@ -5,6 +5,7 @@
  */
 package repuestos.UI;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import repuestos.Logic.Controller;
 
@@ -18,11 +19,14 @@ public class InsertClient extends javax.swing.JFrame {
      * Creates new form InsertClient
      */
     Controller Control;
+    ArrayList<String> TelephoneNumbers;
+    
     public InsertClient(Controller pControl) {
         initComponents();
         Control=pControl;
         _pnl_telephone.setVisible(false);
         Control.changeCurrentUI(this);
+        TelephoneNumbers=new ArrayList<String>();
     }
 
     /**
@@ -50,6 +54,10 @@ public class InsertClient extends javax.swing.JFrame {
         _txt_OrganizationPerson = new javax.swing.JTextField();
         _lbl_Person = new javax.swing.JLabel();
         _txt_Identification = new javax.swing.JTextField();
+        _lbl_PersonCharge = new javax.swing.JLabel();
+        _txt_PersonCharge = new javax.swing.JTextField();
+        _lbl_PersonCharge1 = new javax.swing.JLabel();
+        _txt_Telehpone = new javax.swing.JTextField();
         _btn_AddClient = new javax.swing.JButton();
         _pnl_telephone = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -144,6 +152,22 @@ public class InsertClient extends javax.swing.JFrame {
 
         _lbl_Person.setText("Person in Charge");
 
+        _txt_Identification.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_IdentificationKeyReleased(evt);
+            }
+        });
+
+        _lbl_PersonCharge.setText("Person's Charge");
+
+        _lbl_PersonCharge1.setText("Telephone");
+
+        _txt_Telehpone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_TelehponeKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -162,9 +186,13 @@ public class InsertClient extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(_lbl_City)
                             .addComponent(_lbl_Identification)
-                            .addComponent(_lbl_Person))
+                            .addComponent(_lbl_Person)
+                            .addComponent(_lbl_PersonCharge)
+                            .addComponent(_lbl_PersonCharge1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_txt_Telehpone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_txt_PersonCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_txt_OrganizationPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_txt_City, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_txt_Identification, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -192,7 +220,15 @@ public class InsertClient extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_lbl_Person)
                     .addComponent(_txt_OrganizationPerson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_lbl_PersonCharge)
+                    .addComponent(_txt_PersonCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_txt_Telehpone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_lbl_PersonCharge1))
+                .addContainerGap())
         );
 
         _btn_AddClient.setText("Done");
@@ -207,6 +243,11 @@ public class InsertClient extends javax.swing.JFrame {
         jScrollPane1.setViewportView(_txa_Telephones);
 
         _btn_AddTelephone.setText("Add Telephone");
+        _btn_AddTelephone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                _btn_AddTelephoneMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout _pnl_telephoneLayout = new javax.swing.GroupLayout(_pnl_telephone);
         _pnl_telephone.setLayout(_pnl_telephoneLayout);
@@ -236,11 +277,11 @@ public class InsertClient extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(_pnl_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(_pnl_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,16 +292,16 @@ public class InsertClient extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(89, 89, 89)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(245, 245, 245)
                         .addComponent(_btn_AddClient))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_pnl_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -270,9 +311,10 @@ public class InsertClient extends javax.swing.JFrame {
 
     public void insertClient(){
         if(_rbn_Organization.isSelected())
-            Control.insertOrganization(_txt_Identification.getText() , _txt_Direction.getText(), _txt_Name.getText(), _txt_City.getText(), _txt_OrganizationPerson.getText());      
+            Control.insertOrganization(_txt_Identification.getText() , _txt_Direction.getText(), _txt_Name.getText(), _txt_City.getText(), _txt_OrganizationPerson.getText(),
+                    _txt_PersonCharge.getText(), _txt_Telehpone.getText());      
         else
-            Control.insertPerson(_txt_Identification.getText(), _txt_Direction.getText() , _txt_Name.getText(), _txt_City.getText());
+            Control.insertPerson(_txt_Identification.getText(), _txt_Direction.getText() , _txt_Name.getText(), _txt_City.getText(), TelephoneNumbers);
     }
     
     private void _txt_DirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__txt_DirectionActionPerformed
@@ -310,6 +352,10 @@ public class InsertClient extends javax.swing.JFrame {
     private void _rbn_OrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__rbn_OrganizationMouseClicked
         // TODO add your handling code here:
         _txt_OrganizationPerson.setVisible(true);
+        _txt_Telehpone.setVisible(true);
+        _lbl_PersonCharge1.setVisible(true);
+        _txt_PersonCharge.setVisible(true);
+        _lbl_PersonCharge.setVisible(true);
         _lbl_Person.setVisible(true);
         _pnl_telephone.setVisible(false);
         
@@ -318,10 +364,35 @@ public class InsertClient extends javax.swing.JFrame {
     private void _rbn_PersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__rbn_PersonMouseClicked
         // TODO add your handling code here:
         _txt_OrganizationPerson.setVisible(false);
+        _txt_Telehpone.setVisible(false);
+        _lbl_PersonCharge1.setVisible(false);
+        _txt_PersonCharge.setVisible(false);
+        _lbl_PersonCharge.setVisible(false);
         _lbl_Person.setVisible(false);
         _pnl_telephone.setVisible(true);
         
     }//GEN-LAST:event__rbn_PersonMouseClicked
+
+    private void _btn_AddTelephoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__btn_AddTelephoneMouseClicked
+        // TODO add your handling code here:
+        new AddTelephone(_txa_Telephones, TelephoneNumbers).setVisible(true);
+    }//GEN-LAST:event__btn_AddTelephoneMouseClicked
+
+    private void _txt_IdentificationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_IdentificationKeyReleased
+        // TODO add your handling code here:
+       if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Identification.setText(""+_txt_Identification.getText().substring(0, _txt_Identification.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_IdentificationKeyReleased
+
+    private void _txt_TelehponeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_TelehponeKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Telehpone.setText(""+_txt_Telehpone.getText().substring(0, _txt_Telehpone.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_TelehponeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -368,6 +439,8 @@ public class InsertClient extends javax.swing.JFrame {
     private javax.swing.JLabel _lbl_Identification;
     private javax.swing.JLabel _lbl_Name;
     private javax.swing.JLabel _lbl_Person;
+    private javax.swing.JLabel _lbl_PersonCharge;
+    private javax.swing.JLabel _lbl_PersonCharge1;
     private javax.swing.JLabel _lbl_Type;
     private javax.swing.JPanel _pnl_telephone;
     private javax.swing.JRadioButton _rbn_Organization;
@@ -378,6 +451,8 @@ public class InsertClient extends javax.swing.JFrame {
     private javax.swing.JTextField _txt_Identification;
     private javax.swing.JTextField _txt_Name;
     private javax.swing.JTextField _txt_OrganizationPerson;
+    private javax.swing.JTextField _txt_PersonCharge;
+    private javax.swing.JTextField _txt_Telehpone;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

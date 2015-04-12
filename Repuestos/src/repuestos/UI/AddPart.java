@@ -84,8 +84,19 @@ public class AddPart extends javax.swing.JFrame {
                 _txt_PercetageActionPerformed(evt);
             }
         });
+        _txt_Percetage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_PercetageKeyReleased(evt);
+            }
+        });
 
-        _lbl_Identification.setText("Factory");
+        _lbl_Identification.setText("Factory Id");
+
+        _txt_Factory.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_FactoryKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -180,6 +191,22 @@ public class AddPart extends javax.swing.JFrame {
         // TODO add your handling code here:
         Control.addPart(_txt_Percetage.getText(), _txt_Name.getText(), _txt_TradeMark.getText(), _txt_Factory.getText());
     }//GEN-LAST:event__btn_AddPartMouseClicked
+
+    private void _txt_PercetageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_PercetageKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else
+            _txt_Percetage.setText(""+_txt_Percetage.getText().substring(0, _txt_Percetage.getText().length() - 1));
+        
+    }//GEN-LAST:event__txt_PercetageKeyReleased
+
+    private void _txt_FactoryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_FactoryKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else
+            _txt_Factory.setText(""+_txt_Factory.getText().substring(0, _txt_Factory.getText().length() - 1));
+        
+    }//GEN-LAST:event__txt_FactoryKeyReleased
 
     /**
      * @param args the command line arguments

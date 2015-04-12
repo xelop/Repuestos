@@ -18,11 +18,16 @@ public class ModifyClient extends javax.swing.JFrame {
      */
     Controller Control;
     String[] Values;
+    String[] Numbers;
+    String[] OldNumbers;
+    boolean Organization;
     public ModifyClient(Controller pControl, String[] pValues) {
         initComponents();
         Control=pControl;
         Values=pValues; //can an alternate key be modified?
         loadPresets();
+        oldNumbers();
+        
     }
 
     /**
@@ -33,16 +38,23 @@ public class ModifyClient extends javax.swing.JFrame {
     public void insertClient(){
         String CurrentSelection;
         if(_rbt_Active.isSelected())
-            CurrentSelection="Active";
+            CurrentSelection="ACTIVO";
         else if(_rbt_Inactive.isSelected())
-            CurrentSelection="Inactive";
+            CurrentSelection="INACTIVO";
         else
-            CurrentSelection="Suspended";
+            CurrentSelection="SUSPENDIDO";
         
-        if(_rbt_Organization.isSelected())
-            Control.modifyOrganization(Values[0], _txt_Direction.getText(), _txt_Name.getText(), _txt_City.getText(), _txt_OrganizationPerson.getText(), CurrentSelection);      
-        else
-            Control.modifyPerson(Values[0], _txt_Direction.getText() , _txt_Name.getText(), _txt_City.getText(), CurrentSelection);
+        if(Organization)
+            Control.modifyOrganization(Values,(new String[]{ _txt_Name.getText(), CurrentSelection, _txt_Direction.getText(), _txt_City.getText(),
+            _txt_OrganizationPerson.getText(),_txt_PersonCharge.getText(), _txt_Telephone.getText()}));      
+        else{
+            Control.setTelephones(OldNumbers, Numbers);
+            Control.modifyPerson(Values,(new String[]{_txt_Name.getText(), CurrentSelection, _txt_Direction.getText(), _txt_City.getText()}));
+        }
+    }
+    public void oldNumbers(){
+        OldNumbers=new String[Numbers.length];
+        System.arraycopy(Numbers, 0, OldNumbers, 0, Numbers.length );
     }
     
     public void loadPresets(){
@@ -50,14 +62,21 @@ public class ModifyClient extends javax.swing.JFrame {
         _txt_Name.setText(Values[2]);
         _txt_City.setText(Values[5]);
         _txt_Direction.setText(Values[4]);
-        if(Values.length==7){
+        if(Values.length==9){
             _txt_OrganizationPerson.setText(Values[6]);
-            _rbt_Organization.setSelected(true);
+            _txt_PersonCharge.setText(Values[7]);
+            _txt_Telephone.setText(Values[8]);
             _pnl_Telephone.setVisible(false);
+            Organization=true;
         }else{
-            _rbt_Person.setSelected(true);
             _lbl_Person.setVisible(false);
             _txt_OrganizationPerson.setVisible(false);
+            _lbl_PersonCharge.setVisible(false);
+            _txt_PersonCharge.setVisible(false);
+            _lbl_Telephone.setVisible(false);
+            _txt_Telephone.setVisible(false);
+            Organization=false;
+            Numbers=Control.getTelephones(Values[1]);
         }
         if(Values[3].equals("Active"))
             _rbt_Active.setSelected(true);
@@ -73,9 +92,6 @@ public class ModifyClient extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        _rbt_Organization = new javax.swing.JRadioButton();
-        _rbt_Person = new javax.swing.JRadioButton();
         _btn_AddClient = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         _lbl_Direction = new javax.swing.JLabel();
@@ -86,11 +102,12 @@ public class ModifyClient extends javax.swing.JFrame {
         _txt_City = new javax.swing.JTextField();
         _txt_OrganizationPerson = new javax.swing.JTextField();
         _lbl_Person = new javax.swing.JLabel();
+        _lbl_PersonCharge = new javax.swing.JLabel();
+        _txt_PersonCharge = new javax.swing.JTextField();
+        _lbl_Telephone = new javax.swing.JLabel();
+        _txt_Telephone = new javax.swing.JTextField();
         _pnl_Telephone = new javax.swing.JPanel();
         _btn_AddTelephone = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        _lbl_Type = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         _lbl_State = new javax.swing.JLabel();
         _rbt_Active = new javax.swing.JRadioButton();
@@ -98,43 +115,6 @@ public class ModifyClient extends javax.swing.JFrame {
         _rbt_suspended = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        buttonGroup1.add(_rbt_Organization);
-        _rbt_Organization.setText("Organization");
-        _rbt_Organization.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                _rbt_OrganizationMouseClicked(evt);
-            }
-        });
-
-        buttonGroup1.add(_rbt_Person);
-        _rbt_Person.setText("Person");
-        _rbt_Person.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                _rbt_PersonMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_rbt_Organization)
-                    .addComponent(_rbt_Person))
-                .addContainerGap(7, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(_rbt_Organization)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_rbt_Person)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
 
         _btn_AddClient.setText("Done");
         _btn_AddClient.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,6 +149,16 @@ public class ModifyClient extends javax.swing.JFrame {
 
         _lbl_Person.setText("Person in Charge");
 
+        _lbl_PersonCharge.setText("Person's Charge");
+
+        _lbl_Telephone.setText("Telephone");
+
+        _txt_Telephone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_TelephoneKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -186,9 +176,13 @@ public class ModifyClient extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(_lbl_City)
-                            .addComponent(_lbl_Person))
+                            .addComponent(_lbl_Person)
+                            .addComponent(_lbl_PersonCharge)
+                            .addComponent(_lbl_Telephone))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_txt_PersonCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_txt_OrganizationPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_txt_City, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
@@ -211,40 +205,40 @@ public class ModifyClient extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_lbl_Person)
                     .addComponent(_txt_OrganizationPerson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_lbl_PersonCharge)
+                    .addComponent(_txt_PersonCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_lbl_Telephone)
+                    .addComponent(_txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        _btn_AddTelephone.setText("Add Telephone");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        _btn_AddTelephone.setText("Change Telephone");
+        _btn_AddTelephone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _btn_AddTelephoneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout _pnl_TelephoneLayout = new javax.swing.GroupLayout(_pnl_Telephone);
         _pnl_Telephone.setLayout(_pnl_TelephoneLayout);
         _pnl_TelephoneLayout.setHorizontalGroup(
             _pnl_TelephoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(_pnl_TelephoneLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(_pnl_TelephoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, _pnl_TelephoneLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, _pnl_TelephoneLayout.createSequentialGroup()
-                        .addComponent(_btn_AddTelephone)
-                        .addGap(44, 44, 44))))
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(_btn_AddTelephone)
+                .addGap(44, 44, 44))
         );
         _pnl_TelephoneLayout.setVerticalGroup(
             _pnl_TelephoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(_pnl_TelephoneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(_btn_AddTelephone)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
-
-        _lbl_Type.setText("Type:");
 
         _lbl_State.setText("State: ");
 
@@ -295,16 +289,9 @@ public class ModifyClient extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_btn_AddClient)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(_lbl_Type)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_btn_AddClient)
+                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(_pnl_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,22 +302,15 @@ public class ModifyClient extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(_lbl_Type)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(_pnl_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addComponent(_btn_AddClient)
@@ -352,24 +332,27 @@ public class ModifyClient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event__txt_CityActionPerformed
 
-    private void _rbt_OrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__rbt_OrganizationMouseClicked
-        // TODO add your handling code here:
-        _txt_OrganizationPerson.setVisible(true);
-        _lbl_Person.setVisible(true);
-        _pnl_Telephone.setVisible(false);
-    }//GEN-LAST:event__rbt_OrganizationMouseClicked
-
     private void _btn_AddClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__btn_AddClientMouseClicked
         // TODO add your handling code here:
         insertClient();
     }//GEN-LAST:event__btn_AddClientMouseClicked
 
-    private void _rbt_PersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__rbt_PersonMouseClicked
+    private void _txt_TelephoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_TelephoneKeyReleased
         // TODO add your handling code here:
-        _txt_OrganizationPerson.setVisible(false);
-        _lbl_Person.setVisible(false);
-        _pnl_Telephone.setVisible(true);
-    }//GEN-LAST:event__rbt_PersonMouseClicked
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Telephone.setText(""+_txt_Telephone.getText().substring(0, _txt_Telephone.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_TelephoneKeyReleased
+
+    private void _btn_AddTelephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__btn_AddTelephoneActionPerformed
+        // TODO add your handling code here:
+        if(Numbers.length==0){
+            
+        }else
+        new ModifyTele(Numbers).setVisible(true);
+        
+    }//GEN-LAST:event__btn_AddTelephoneActionPerformed
     
     
     /**
@@ -414,24 +397,22 @@ public class ModifyClient extends javax.swing.JFrame {
     private javax.swing.JLabel _lbl_Direction;
     private javax.swing.JLabel _lbl_Name;
     private javax.swing.JLabel _lbl_Person;
+    private javax.swing.JLabel _lbl_PersonCharge;
     private javax.swing.JLabel _lbl_State;
-    private javax.swing.JLabel _lbl_Type;
+    private javax.swing.JLabel _lbl_Telephone;
     private javax.swing.JPanel _pnl_Telephone;
     private javax.swing.JRadioButton _rbt_Active;
     private javax.swing.JRadioButton _rbt_Inactive;
-    private javax.swing.JRadioButton _rbt_Organization;
-    private javax.swing.JRadioButton _rbt_Person;
     private javax.swing.JRadioButton _rbt_suspended;
     private javax.swing.JTextField _txt_City;
     private javax.swing.JTextField _txt_Direction;
     private javax.swing.JTextField _txt_Name;
     private javax.swing.JTextField _txt_OrganizationPerson;
+    private javax.swing.JTextField _txt_PersonCharge;
+    private javax.swing.JTextField _txt_Telephone;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package repuestos.UI;
-
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 import repuestos.Logic.Controller;
 
 /**
@@ -24,6 +28,11 @@ public class FindClient extends javax.swing.JFrame {
         Control=pControl;
         SearchType=pSearchType;
         Control.changeCurrentUI(this);
+        try {
+            new JFormattedTextField(new MaskFormatter("##.##"));
+        } catch (ParseException ex) {
+            Logger.getLogger(FindClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -36,17 +45,29 @@ public class FindClient extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        _txt_Name = new javax.swing.JTextField();
         _btn_Find = new javax.swing.JButton();
+        _txt_Name = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Name: ");
+        jLabel1.setText("Id:");
 
         _btn_Find.setText("Find");
         _btn_Find.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _btn_FindActionPerformed(evt);
+            }
+        });
+
+        _txt_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                _txt_NameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_NameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                _txt_NameKeyTyped(evt);
             }
         });
 
@@ -58,8 +79,8 @@ public class FindClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_txt_Name, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(_txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(_btn_Find)
                 .addGap(23, 23, 23))
         );
@@ -69,9 +90,9 @@ public class FindClient extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(_txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_btn_Find))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(_btn_Find)
+                    .addComponent(_txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,8 +100,27 @@ public class FindClient extends javax.swing.JFrame {
 
     private void _btn_FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__btn_FindActionPerformed
         // TODO add your handling code here:
+        
         Control.findClient(_txt_Name.getText(), SearchType);
     }//GEN-LAST:event__btn_FindActionPerformed
+
+    private void _txt_NameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_NameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__txt_NameKeyPressed
+
+    private void _txt_NameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_NameKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event__txt_NameKeyTyped
+
+    private void _txt_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_NameKeyReleased
+        // TODO add your handling code here:
+
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Name.setText(""+_txt_Name.getText().substring(0, _txt_Name.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_NameKeyReleased
 
     /**
      * @param args the command line arguments

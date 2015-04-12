@@ -109,6 +109,7 @@
         <Component class="javax.swing.JTextField" name="_txt_Tax">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_txt_TaxActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_TaxKeyReleased"/>
           </Events>
         </Component>
       </SubComponents>

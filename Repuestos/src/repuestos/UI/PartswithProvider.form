@@ -73,6 +73,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="_txt_ProviderID">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_ProviderIDKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -80,6 +83,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="_txt_Cost">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_CostKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="_btn_Associate">
       <Properties>

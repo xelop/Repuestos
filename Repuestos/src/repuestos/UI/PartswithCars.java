@@ -41,6 +41,12 @@ public class PartswithCars extends javax.swing.JFrame {
 
         jLabel1.setText("Car's ID");
 
+        _txt_CarID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_CarIDKeyReleased(evt);
+            }
+        });
+
         jButton1.setText("Associate");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -81,6 +87,14 @@ public class PartswithCars extends javax.swing.JFrame {
         // TODO add your handling code here:
         Control.associatePartWCar(CurrentPart[0], _txt_CarID.getText());
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void _txt_CarIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_CarIDKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_CarID.setText(""+_txt_CarID.getText().substring(0, _txt_CarID.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_CarIDKeyReleased
 
     /**
      * @param args the command line arguments

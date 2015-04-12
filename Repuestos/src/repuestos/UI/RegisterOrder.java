@@ -57,6 +57,11 @@ public class RegisterOrder extends javax.swing.JFrame {
                 _txt_TaxActionPerformed(evt);
             }
         });
+        _txt_Tax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_TaxKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -134,6 +139,14 @@ public class RegisterOrder extends javax.swing.JFrame {
         Control.registerOrder(Values[0], _txt_Date.getText(), _txt_Tax.getText());
         
     }//GEN-LAST:event__btn_NextMouseClicked
+
+    private void _txt_TaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_TaxKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Tax.setText(""+_txt_Tax.getText().substring(0, _txt_Tax.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_TaxKeyReleased
 
     /**
      * @param args the command line arguments

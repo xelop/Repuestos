@@ -5,6 +5,9 @@
  */
 package repuestos.UI;
 
+import java.util.ArrayList;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author Xelop
@@ -14,8 +17,12 @@ public class AddTelephone extends javax.swing.JFrame {
     /**
      * Creates new form AddTelephone
      */
-    public AddTelephone() {
+    JTextArea TelephoneDisplay;
+    ArrayList<String> Telephones;
+    public AddTelephone(JTextArea pDisplay, ArrayList<String> pNumbers) {
         initComponents();
+        TelephoneDisplay=pDisplay;
+        Telephones=pNumbers;
     }
 
     /**
@@ -28,14 +35,28 @@ public class AddTelephone extends javax.swing.JFrame {
     private void initComponents() {
 
         _lbl_Telephone = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        _txt_Number = new javax.swing.JTextField();
         _btn_AddTelephone = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         _lbl_Telephone.setText("Telephone: ");
 
+        _txt_Number.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                _txt_NumberKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_NumberKeyReleased(evt);
+            }
+        });
+
         _btn_AddTelephone.setText("Add");
+        _btn_AddTelephone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                _btn_AddTelephoneMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,7 +67,7 @@ public class AddTelephone extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(_lbl_Telephone)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_txt_Number, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 41, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -59,7 +80,7 @@ public class AddTelephone extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_lbl_Telephone)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_txt_Number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(_btn_AddTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -67,6 +88,27 @@ public class AddTelephone extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void _btn_AddTelephoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__btn_AddTelephoneMouseClicked
+        // TODO add your handling code here:
+        Telephones.add(_txt_Number.getText());
+        TelephoneDisplay.setText(TelephoneDisplay.getText()+ _txt_Number.getText()+"\n");
+        this.dispose();
+        
+    }//GEN-LAST:event__btn_AddTelephoneMouseClicked
+
+    private void _txt_NumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_NumberKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event__txt_NumberKeyPressed
+
+    private void _txt_NumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_NumberKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else
+            _txt_Number.setText(""+_txt_Number.getText().substring(0, _txt_Number.getText().length() - 1));
+        
+    }//GEN-LAST:event__txt_NumberKeyReleased
 
     /**
      * @param args the command line arguments
@@ -98,7 +140,7 @@ public class AddTelephone extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddTelephone().setVisible(true);
+                //new AddTelephone().setVisible(true);
             }
         });
     }
@@ -106,6 +148,6 @@ public class AddTelephone extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton _btn_AddTelephone;
     private javax.swing.JLabel _lbl_Telephone;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField _txt_Number;
     // End of variables declaration//GEN-END:variables
 }

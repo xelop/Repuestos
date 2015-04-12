@@ -44,7 +44,19 @@ public class ModifyPrice extends javax.swing.JFrame {
 
         jLabel1.setText("Provider's ID");
 
+        _txt_ProviderID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_ProviderIDKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Cost per Part");
+
+        _txt_Cost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_CostKeyReleased(evt);
+            }
+        });
 
         _btn_Modify.setText("Modify");
         _btn_Modify.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,6 +108,22 @@ public class ModifyPrice extends javax.swing.JFrame {
         // TODO add your handling code here:
         Control.modifyPartPrice(CurrentPart[0], _txt_ProviderID.getText(), _txt_Cost.getText());
     }//GEN-LAST:event__btn_ModifyMouseClicked
+
+    private void _txt_ProviderIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_ProviderIDKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_ProviderID.setText(""+_txt_ProviderID.getText().substring(0, _txt_ProviderID.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_ProviderIDKeyReleased
+
+    private void _txt_CostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_CostKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Cost.setText(""+_txt_Cost.getText().substring(0, _txt_Cost.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_CostKeyReleased
 
     /**
      * @param args the command line arguments

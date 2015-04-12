@@ -46,13 +46,18 @@ public class OrderItems extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        _lbl_Name.setText("Provider");
+        _lbl_Name.setText("Provider ID");
 
-        _d.setText("Part");
+        _d.setText("Part ID");
 
         _txt_Provider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _txt_ProviderActionPerformed(evt);
+            }
+        });
+        _txt_Provider.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_ProviderKeyReleased(evt);
             }
         });
 
@@ -63,14 +68,30 @@ public class OrderItems extends javax.swing.JFrame {
                 _txt_PartActionPerformed(evt);
             }
         });
+        _txt_Part.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_PartKeyReleased(evt);
+            }
+        });
 
         _txt_Quantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _txt_QuantityActionPerformed(evt);
             }
         });
+        _txt_Quantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_QuantityKeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Order ID");
+
+        _txt_OrderID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                _txt_OrderIDKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -203,6 +224,38 @@ public class OrderItems extends javax.swing.JFrame {
     private void _btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__btn_BackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event__btn_BackActionPerformed
+
+    private void _txt_OrderIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_OrderIDKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_OrderID.setText(""+_txt_OrderID.getText().substring(0, _txt_OrderID.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_OrderIDKeyReleased
+
+    private void _txt_ProviderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_ProviderKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Provider.setText(""+_txt_Provider.getText().substring(0, _txt_Provider.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_ProviderKeyReleased
+
+    private void _txt_PartKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_PartKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Part.setText(""+_txt_Part.getText().substring(0, _txt_Part.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_PartKeyReleased
+
+    private void _txt_QuantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_QuantityKeyReleased
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
+        } else{
+            _txt_Quantity.setText(""+_txt_Quantity.getText().substring(0, _txt_Quantity.getText().length() - 1));
+        }
+    }//GEN-LAST:event__txt_QuantityKeyReleased
 
     /**
      * @param args the command line arguments

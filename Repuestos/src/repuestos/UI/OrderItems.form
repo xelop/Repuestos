@@ -119,17 +119,18 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="_lbl_Name">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Provider"/>
+            <Property name="text" type="java.lang.String" value="Provider ID"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="_d">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Part"/>
+            <Property name="text" type="java.lang.String" value="Part ID"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="_txt_Provider">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_txt_ProviderActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_ProviderKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="_lbl_City">
@@ -140,11 +141,13 @@
         <Component class="javax.swing.JTextField" name="_txt_Part">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_txt_PartActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_PartKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="_txt_Quantity">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_txt_QuantityActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_QuantityKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -153,6 +156,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="_txt_OrderID">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="_txt_OrderIDKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

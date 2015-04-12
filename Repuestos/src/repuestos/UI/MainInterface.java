@@ -242,6 +242,7 @@ public class MainInterface extends javax.swing.JFrame {
     private void _btn_ModifyClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__btn_ModifyClientMouseClicked
         // TODO add your handling code here:
         new FindClient(Control,1).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event__btn_ModifyClientMouseClicked
 
     private void _btn_ModifyClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__btn_ModifyClientActionPerformed

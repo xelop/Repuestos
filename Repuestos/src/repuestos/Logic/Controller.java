@@ -45,23 +45,41 @@ public class Controller {
        }
    }
    
-   public void insertPerson(String pIdentification, String pDirection, String pName, String pCity){
-       String message=Data.insertPerson(pIdentification, pDirection, pName, pCity);
+   public void insertPerson(String pIdentification, String pDirection, String pName, String pCity, ArrayList<String> pNumbers){
+       String message=Data.insertPerson(pIdentification, pDirection, pName, pCity, pNumbers);
        uiDecision(message);
            
    }
    
-   public void insertOrganization(String pIdentification, String pDirection, String pName, String pCity, String pPerson){
-       String message=Data.insertOrganization(pIdentification, pDirection, pName, pCity, pPerson);
+   public void insertOrganization(String pIdentification, String pDirection, String pName, String pCity, String pPerson, String pPersonCharge, String pTelehpone){
+       String message=Data.insertOrganization(pIdentification, pDirection, pName, pCity, pPerson, pPersonCharge, pTelehpone);
        uiDecision(message);
    }
    
-   public void modifyPerson(String pIdClient, String pDirection, String pName, String pCity, String pCurrentStatus){
-       error(Data.modifyClient(pIdClient, pDirection, pName, pCity, pCurrentStatus,""));
+   public void modifyPerson(String[] pOldValues, String[] pValues){
+       for(int i=0; i<pOldValues.length-2;i++){
+           if(pOldValues[i+2].equals(pValues[i]))
+               pValues[i]=null;
+       }
+       
+       error(Data.modifyClient(pOldValues[0],pValues[2], pValues[0], pValues[3], pValues[1],null,null,null));
    }
    
-   public void modifyOrganization(String pIdClient, String pDirection, String pName, String pCity, String pPerson, String pCurrentStatus){
-       error(Data.modifyClient(pIdClient, pDirection, pName, pCity, pCurrentStatus,  pPerson));
+   public void setTelephones(String[] pOldValues, String[] pNewValues){
+       Data.modifyTelephones(pOldValues, pNewValues);
+   }
+   
+   public String[] getTelephones(String pId){
+       return Data.getTelephones(pId);
+   }
+   
+   public void modifyOrganization(String[] pOldValues, String[] pValues){
+       for(int i=0; i<pOldValues.length-2;i++){
+           if(pOldValues[i+2].equals(pValues[i]))
+               pValues[i]=null;
+           System.out.println(i);
+       }
+       error(Data.modifyClient(pOldValues[0], pValues[2], pValues[0], pValues[3], pValues[1], pValues[4],  pValues[5], pValues[6]));
    }
    
    public void suspendCllient(String pName){
@@ -114,19 +132,22 @@ public class Controller {
    
    public void findClient(String pID, int pSearchType){
        String[] values=Data.findClient(pID);
-       if(values.length!=0){
+       
+       if(values.length>1){
            CurrentUI.dispose();
            if(pSearchType==1){
                CurrentUI=new ModifyClient(this, values);
            }else if(pSearchType==2){
             CurrentUI=new SuspendClient(this, values);
            }else if(pSearchType==3){
-            CurrentUI=new RegisterOrder(this, values);
+               if(values[3].equals("SUSPENDIDO")){
+                   JOptionPane.showMessageDialog(CurrentUI,"El cliente que ingreso esta suspendido");
+               }else
+               CurrentUI=new RegisterOrder(this, values);
            }
            CurrentUI.setVisible(true);
-       }else{
+       }else
            JOptionPane.showMessageDialog(CurrentUI,"El cliente que ingreso no existe");
-       }
    }
    
    public void findPart(String pID, int pSearchType){
@@ -158,6 +179,10 @@ public class Controller {
    
    public void addItem(String pOrder, String pProvider, String pPart, String pQuantity){
        error(Data.addItem(pOrder, pProvider, pPart, pQuantity));
+   }
+   
+   public void chechkArrayPerson(ArrayList<String> pOldValues){
+       
    }
    
    

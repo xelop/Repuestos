@@ -57,15 +57,14 @@ public class DataBaseConnection {
         return Instance;   
     }
     
-    public String insertPerson(String pIdentification, String pDirection, String pName, String pCity){
+    public String insertPerson(String pIdentification, String pDirection, String pName, String pCity, ArrayList<String> pNumbers){
         
         try {
             StoredProcCall= Connection.prepareCall("{? = call CreatePersona(?,?,?,?,?)}");
-            int counter=0;
             
             StoredProcCall.registerOutParameter(1, Types.INTEGER);
             
-            StoredProcCall.setString(2, "Active");
+            StoredProcCall.setString(2, "ACTIVO");
             StoredProcCall.setString(3, pDirection);
             StoredProcCall.setString(4, pName);
             StoredProcCall.setString(5, pCity);
@@ -76,6 +75,14 @@ public class DataBaseConnection {
             if(returnValue==-1){
                 ErrorOcurred=true;
                 return "La persona mencionada ya existe";
+            }
+            for(String number:pNumbers){
+                StoredProcCall= Connection.prepareCall("{call CreateTelefonoPersona(?,?)}");
+
+                StoredProcCall.setString(2,pIdentification);
+                StoredProcCall.setString(1,number);
+                StoredProcCall.execute();
+                
             }
             return "";
           
@@ -89,19 +96,21 @@ public class DataBaseConnection {
         return "Error";
     }
     
-    public String insertOrganization(String pIdentification, String pDirection, String pName, String pCity, String pPerson){
+    public String insertOrganization(String pIdentification, String pDirection, String pName, String pCity, String pPerson, String pPersonCharge, String pTelehpone){
         try {
             
-            StoredProcCall= Connection.prepareCall("{? = call CreateOrganizacion(?,?,?,?,?,?)}");
+            StoredProcCall= Connection.prepareCall("{? = call CreateOrganizacion(?,?,?,?,?,?,?,?)}");
             
             StoredProcCall.registerOutParameter(1, Types.INTEGER);
             
-            StoredProcCall.setString(2, "Active");
+            StoredProcCall.setString(2, "ACTIVO");
             StoredProcCall.setString(3, pDirection);
             StoredProcCall.setString(4, pName);
             StoredProcCall.setString(5, pCity);
             StoredProcCall.setString(6, pIdentification);
             StoredProcCall.setString(7, pPerson);
+            StoredProcCall.setString(8, pPersonCharge);
+            StoredProcCall.setString(9, pTelehpone);
             
             StoredProcCall.execute();
             
@@ -156,7 +165,7 @@ public class DataBaseConnection {
     @SuppressWarnings("empty-statement")
     public String[] findClient(String pId){
         try {
-            StoredProcCall= Connection.prepareCall("{?=call GetOrganizacionOPersona(?,?,?,?,?,?,?,?)}");
+            StoredProcCall= Connection.prepareCall("{?=call GetOrganizacionOPersona(?,?,?,?,?,?,?,?,?,?)}");
             StoredProcCall.setString(2, pId);
             StoredProcCall.registerOutParameter(1, Types.INTEGER);
             StoredProcCall.registerOutParameter(3, Types.INTEGER);
@@ -165,8 +174,11 @@ public class DataBaseConnection {
             StoredProcCall.registerOutParameter(6, Types.VARCHAR);
             StoredProcCall.registerOutParameter(7, Types.VARCHAR);
             StoredProcCall.registerOutParameter(8, Types.VARCHAR);
-            StoredProcCall.registerOutParameter(9, Types.INTEGER);
+            StoredProcCall.registerOutParameter(9, Types.VARCHAR);
+            StoredProcCall.registerOutParameter(10, Types.VARCHAR);
+            StoredProcCall.registerOutParameter(11, Types.INTEGER);
             StoredProcCall.execute();
+            
             if(StoredProcCall.getInt(1)==-6){
                 return new String[]{Integer.toString(StoredProcCall.getInt(3)), Integer.toString(StoredProcCall.getInt(4)), StoredProcCall.getString(5),
                 StoredProcCall.getString(6), StoredProcCall.getString(7), StoredProcCall.getString(8)};
@@ -174,35 +186,71 @@ public class DataBaseConnection {
             }
             else if(StoredProcCall.getInt(1)==-7){
                 return new String[]{Integer.toString(StoredProcCall.getInt(3)), Integer.toString(StoredProcCall.getInt(4)), StoredProcCall.getString(5),
-                StoredProcCall.getString(6), StoredProcCall.getString(7), StoredProcCall.getString(8),Integer.toString(StoredProcCall.getInt(9))};
+                StoredProcCall.getString(6), StoredProcCall.getString(7), StoredProcCall.getString(8),StoredProcCall.getString(9), StoredProcCall.getString(10), Integer.toString(StoredProcCall.getInt(11))};
             }else
                 return new String[]{};
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             return new String[]{};
         }
     }
     
-    public String modifyClient(String pIdClient, String pDirection, String pName, String pCity, String pCurrentStatus, String pPerson){
+    public String modifyClient(String pIdClient, String pDirection, String pName, String pCity, String pCurrentStatus, String pPerson, String pPersonCharge, String pTelehpone){
             //el metodo no agarra la excepcion de nombres repetidos, pero no modifica la base en dado caso
         try {
-            StoredProcCall= Connection.prepareCall("{call UpdateCliente(?,?,?,?,?,?)}");
-            int counter=0;
-            
-            StoredProcCall.setString(1, pIdClient);
-            StoredProcCall.setString(2, pCurrentStatus);
-            StoredProcCall.setString(3, pDirection);
-            StoredProcCall.setString(4, pName);
-            StoredProcCall.setString(5, pCity);
-            StoredProcCall.setString(6, pPerson);
+            StoredProcCall= Connection.prepareCall("{? = call UpdateCliente(?,?,?,?,?,?,?,?)}");
+            StoredProcCall.registerOutParameter(1, Types.INTEGER);
+            StoredProcCall.setString(2, pIdClient);
+            StoredProcCall.setString(3, pCurrentStatus);
+            StoredProcCall.setString(4, pDirection);
+            StoredProcCall.setString(5, pName);
+            StoredProcCall.setString(6, pCity);
+            StoredProcCall.setString(7, pPerson);
+            StoredProcCall.setString(8, pPersonCharge);
+            StoredProcCall.setString(9, pTelehpone);
             
             StoredProcCall.executeUpdate();
-            System.out.println("funciono?");
+            if(StoredProcCall.getInt(1)==-1){
+                return "El nombre indicado ya existe";
+            }
+            
             return "";
             
         } catch (SQLException ex) {
             System.out.println(ex.getErrorCode()+ex.getMessage());
         }
         return "";
+    }
+    
+    public void modifyTelephones(String[] pOldValues, String[] pNewValues){
+        try {
+            StoredProcCall = Connection.prepareCall("{call UpdateTelefonoPersona(?,?)}");
+            for(int i=0;i<pOldValues.length;i++){
+                StoredProcCall.setString(1, pOldValues[i]);
+                StoredProcCall.setString(2, pNewValues[i]);
+                StoredProcCall.execute();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String[] getTelephones(String pCedula){
+        ArrayList<String> numbers= new ArrayList<String>();
+        try{
+            StoredProcCall = Connection.prepareCall("{call GetTelefonosPersona(?)}");
+            StoredProcCall.setString(1, pCedula);
+            ResultSet rs=StoredProcCall.executeQuery();
+            while(rs.next()){
+               numbers.add(rs.getString("Telefono"));
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getErrorCode()+ex.getMessage());
+        }
+        String[] finalNumbers = new String[numbers.size()];
+        finalNumbers = numbers.toArray(finalNumbers);
+        return finalNumbers;
     }
     
     public void suspendClient(String pName){
@@ -220,14 +268,15 @@ public class DataBaseConnection {
         try {
             Statement stmt = Connection.createStatement();
             String sql;
-            sql = "SELECT Nombre FROM Clientes;";
+            sql = "SELECT Id, Nombre, Estado, Direccion, Ciudad  FROM Clientes;";
             ResultSet rs = stmt.executeQuery(sql);
 
             // Extraer datos de un conjunto de resultados.
             
             while(rs.next()){
                 
-                values.add(rs.getString("Nombre"));
+                values.add("ID: "+Integer.toString(rs.getInt("Id"))+ " Name: "+ rs.getString("Nombre")
+                + " Direction: "+ rs.getString("Direccion") + " City: "+ rs.getString(4) + " Status: "+ rs.getString("Estado"));
             }
             return values;
             
@@ -392,12 +441,15 @@ public class DataBaseConnection {
     
     public String registerOrder(String pClient, String pDate, String pTax){
         try {
-            StoredProcCall= Connection.prepareCall("{ call CreateOrden(?,?,?)}");
-            StoredProcCall.setString(1, pTax);
-            StoredProcCall.setString(2, pDate);
-            StoredProcCall.setString(3, pClient);
+            StoredProcCall= Connection.prepareCall("{ ?=call CreateOrden(?,?,?)}");
+            StoredProcCall.registerOutParameter(1, Types.INTEGER);
+            StoredProcCall.setString(2, pTax);
+            StoredProcCall.setString(3, pDate);
+            StoredProcCall.setString(4, pClient);
             StoredProcCall.execute();
-            
+            if(StoredProcCall.getInt(1)==-1){
+                return "El cliente esta suspendido, no se puede hacer la orden";
+            }
             return "";
         } catch (SQLException ex) {
             return ex.getMessage();
