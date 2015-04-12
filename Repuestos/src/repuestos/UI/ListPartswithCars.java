@@ -161,10 +161,6 @@ public class ListPartswithCars extends javax.swing.JFrame {
 
     private void _txt_ModelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_ModelKeyReleased
         // TODO add your handling code here:
-        if(Character.isDigit(evt.getKeyChar())||evt.getExtendedKeyCode()==8) {
-        } else{
-            _txt_Model.setText(""+_txt_Model.getText().substring(0, _txt_Model.getText().length() - 1));
-        }
     }//GEN-LAST:event__txt_ModelKeyReleased
 
     private void _txt_YearKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__txt_YearKeyReleased
