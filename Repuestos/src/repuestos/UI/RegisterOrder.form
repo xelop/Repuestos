@@ -93,7 +93,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="_lbl_Name">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Date (Example)"/>
+            <Property name="text" type="java.lang.String" value="Date (dd-mm-yy)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="_d">

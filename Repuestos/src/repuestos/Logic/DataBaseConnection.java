@@ -47,7 +47,7 @@ public class DataBaseConnection {
                 System.out.println("Product version: " + dm.getDatabaseProductVersion());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Controller.getInstance().connectionFailed();
         }
     }
     

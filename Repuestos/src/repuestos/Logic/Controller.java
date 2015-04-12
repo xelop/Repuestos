@@ -131,6 +131,10 @@ public class Controller {
        return Data.listPartsbyCar(pModel, pYear);
    }
    
+   public void connectionFailed(){
+       JOptionPane.showMessageDialog(CurrentUI,"No se pudo hacer la coneccion a la base");
+   }
+   
    public void findClient(String pID, int pSearchType){
        String[] values=Data.findClient(pID);
        

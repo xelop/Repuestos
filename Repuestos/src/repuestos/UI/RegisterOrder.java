@@ -42,7 +42,7 @@ public class RegisterOrder extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        _lbl_Name.setText("Date (Example)");
+        _lbl_Name.setText("Date (dd-mm-yy)");
 
         _d.setText("Tax");
 
