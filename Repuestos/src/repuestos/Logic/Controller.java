@@ -100,7 +100,7 @@ public class Controller {
    }
    
    public void erasePart(String pPart){
-       Data.erasePart(pPart);
+       error(Data.erasePart(pPart));
        CurrentUI.dispose();
        CurrentUI=new MainInterface(this);
        CurrentUI.setVisible(true);

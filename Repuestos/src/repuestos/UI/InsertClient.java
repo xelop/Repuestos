@@ -312,7 +312,8 @@ public class InsertClient extends javax.swing.JFrame {
     public void insertClient(){
         if(_rbn_Organization.isSelected())
             Control.insertOrganization(_txt_Identification.getText() , _txt_Direction.getText(), _txt_Name.getText(), _txt_City.getText(), _txt_OrganizationPerson.getText(),
-                    _txt_PersonCharge.getText(), _txt_Telehpone.getText());      
+                    _txt_PersonCharge.getText(), _txt_Telehpone.getText());
+        //String pIdentification, String pDirection, String pName, String pCity, String pPerson, String pPersonCharge, String pTelehpone
         else
             Control.insertPerson(_txt_Identification.getText(), _txt_Direction.getText() , _txt_Name.getText(), _txt_City.getText(), TelephoneNumbers);
     }
