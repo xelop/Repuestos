@@ -22,6 +22,7 @@ public class Controller {
    
    private Controller(){
        Data=DataBaseConnection.getInstance();
+       //Utilitarios.cargarUtilitarios(Data);
    }
    
    public static Controller getInstance(){
@@ -48,7 +49,7 @@ public class Controller {
    public void insertPerson(String pIdentification, String pDirection, String pName, String pCity, ArrayList<String> pNumbers){
        String message=Data.insertPerson(pIdentification, pDirection, pName, pCity, pNumbers);
        uiDecision(message);
-           
+
    }
    
    public void insertOrganization(String pIdentification, String pDirection, String pName, String pCity, String pPerson, String pPersonCharge, String pTelehpone){
@@ -136,7 +137,7 @@ public class Controller {
        if(values.length>1){
            CurrentUI.dispose();
            if(pSearchType==1){
-               CurrentUI=new ModifyClient(this, values);
+            CurrentUI=new ModifyClient(this, values);
            }else if(pSearchType==2){
             CurrentUI=new SuspendClient(this, values);
            }else if(pSearchType==3){
@@ -179,13 +180,7 @@ public class Controller {
    
    public void addItem(String pOrder, String pProvider, String pPart, String pQuantity){
        error(Data.addItem(pOrder, pProvider, pPart, pQuantity));
-   }
-   
-   public void chechkArrayPerson(ArrayList<String> pOldValues){
-       
-   }
-   
-   
-   
-    
+	}
+
+
 }
