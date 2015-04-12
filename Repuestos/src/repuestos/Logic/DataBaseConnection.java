@@ -327,17 +327,20 @@ public class DataBaseConnection {
         
     }
     
-    public void erasePart(String pPart){
+    public String erasePart(String pPart){
         try {
             
             StoredProcCall=Connection.prepareCall("{call DeleteParte(?)}");
             StoredProcCall.setString(1, pPart);
             StoredProcCall.execute();
             JOptionPane.showMessageDialog(null, "La parte: " + pPart + "fue borrada.");
+            return "";
             
         } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "La parte no puede ser borrada ya que participa en una orden.");
+            if (ex.getErrorCode() == 547){
+                return "La parte pertenece a una orden, no puede ser borrada";
+            }
+            return ex.getMessage();
         }
         
     }
