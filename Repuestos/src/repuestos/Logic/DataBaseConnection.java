@@ -134,8 +134,8 @@ public class DataBaseConnection {
             if(ex.getErrorCode()==2601){
                 return "El nombre ya es ocupado por otro cliente";
             }
+            return ex.getMessage();
         }
-        return "";
     }
     
     public void getClienteQuerie(String pIdentification){
@@ -333,9 +333,11 @@ public class DataBaseConnection {
             StoredProcCall=Connection.prepareCall("{call DeleteParte(?)}");
             StoredProcCall.setString(1, pPart);
             StoredProcCall.execute();
+            JOptionPane.showMessageDialog(null, "La parte: " + pPart + "fue borrada.");
             
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "La parte no puede ser borrada ya que participa en una orden.");
         }
         
     }
