@@ -39,7 +39,8 @@ public class Repuestos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     new MainInterface(Controller.getInstance()).setVisible(true);   
+     new MainInterface(Controller.getInstance()).setVisible(true); 
+     
     }
     
 }
